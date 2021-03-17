@@ -1,0 +1,5 @@
+= form_with model: product do |f|
+  div = f.text_field :name, placeholder: 'Product name'
+  div = f.text_area :description, placeholder: 'Write description here'
+  div = f.text_field :stock, placeholder: 'number of stock'
+  div = f.submit 'Submit Product'

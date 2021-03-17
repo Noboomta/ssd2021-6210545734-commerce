@@ -1,0 +1,54 @@
+.row
+  .col-6
+    h1 This is Products list
+  / .col-6
+  /   .float-right
+  /     span = current_admin.email
+  /     span.ml-3 = "#{current_admin.firstname} #{current_admin.lastname}"
+  /     span.ml-3 = link_to 'Logout', destroy_admin_session_path
+
+.row
+  .col
+    = form_tag products_path, method: :get do
+      = text_field_tag 'search', @search, placeholder: 'Type something',
+        class: 'form-control'
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-striped.table-hover
+      thead.thead-dark
+        tr
+          th ID
+          th Name
+          th Description
+          th Stock
+          th Created at
+          th Updated at
+          th Action
+      tbody
+        - @products.each do |a|
+          tr
+            td = a.id
+            td.font-weight-bold = a.name
+            td = a.description
+            td = a.stock
+            td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
+            td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
+            td
+              span
+                = link_to product_path(a) do
+                  i.fas.fa-eye
+              span.ml-3
+                = link_to edit_product_path(a) do
+                  i.fas.fa-pen
+              span.ml-3
+                = link_to product_path(a), method: :delete, data: { confirm: "Are you sure?" } do
+                  i.fas.fa-trash
+
+.row
+  .col-6
+    = paginate @products
+  .col-6
+    .float-right
+      = link_to new_product_path do
+        = button_tag 'Add new Product', class: 'btn btn-primary'

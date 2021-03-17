@@ -1,0 +1,17 @@
+h1 = @product.name
+div = link_to 'Back', products_path
+hr
+div = @product.description
+hr
+div = @product.stock
+hr
+h2 Comments Section
+/ div
+/   - @article.comments.each do |comment|
+/     div = "#{comment.author} Wrote : #{comment.text}"
+/ hr
+/ h2 Add new Comment Section
+/ = form_with model: [@article, @article.comments.build] do |f|
+/   div = f.text_field :author, placeholder: 'Author'
+/   div = f.text_area :text, placeholder: 'Write text here'
+/   div = f.submit 'Submit Comment'
