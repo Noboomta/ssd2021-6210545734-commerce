@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, only: [:create,:edit,:destroy]
   
   def index
     @search = params[:search]

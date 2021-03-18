@@ -3,9 +3,9 @@
     h1 This is Products list
   .col-6
     .float-right
-      span = current_admin.email
-      span.ml-3 = "#{current_admin.firstname} #{current_admin.lastname}"
-      span.ml-3 = link_to 'Logout', destroy_admin_session_path
+      / span = current_admin.email
+      / span.ml-3 = "#{current_admin.firstname} #{current_admin.lastname}"
+      span.ml-3 = link_to 'Logout', destroy_admin_session_path, method: :delete
 
 .row
   .col
