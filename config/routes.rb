@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :products do 
   end
+  resources :test_articles, path: '/test_articles', only: :index
 end
