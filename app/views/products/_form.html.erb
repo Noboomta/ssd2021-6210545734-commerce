@@ -1,0 +1,32 @@
+<%# / = form_with model: product do |f|
+/   div = f.text_field :name, placeholder: 'Product name'
+/   div = f.text_area :description, placeholder: 'Write description here'
+/   div = f.text_field :stock, placeholder: 'number of stock'
+/   div = f.select :category_id, options_for_select(@categories), :prompt => "Select one!"
+/   div = f.submit 'Submit Product' %>
+
+<%= form_with(model: product) do |form| %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_area :name %>
+  </div>
+
+  <div>
+    <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Category",) %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stock %>
+    <%= form.number_field :stock %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

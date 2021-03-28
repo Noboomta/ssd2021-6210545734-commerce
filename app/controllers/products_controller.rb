@@ -14,39 +14,54 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def new
-    puts "This is how you print out something."
-    @product = Product.new
+  def new 
+    @product = Product.new 
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def edit
-    @product = Product.find(params[:id])
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create
-    @product = Product.create(product_params)
-
+    @product = Product.new(product_params)
+    @product.category_id = params[:category_id]
     if @product.invalid?
-      flash[:error] = @product.errors.full_messages
+      # flash[:error] = @products.errors.objects.first.full_message
+    end
+    if @product.save
+      flash[:success] = "Product created"
     end
 
     redirect_to action: :index
   end
 
   def update
-    @product = Product.find(params[:id])
-    @product.update(product_params)
-    redirect_to action: :index
+    @product.category_id = params[:category_id]
+    respond_to do |format|
+      if @product.update(product_params)
+        format.html { redirect_to @product, notice: "Product was successfully updated." }
+        format.json { render :show, status: :ok, location: @product }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
   end
-
+  
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
-    redirect_to action: :index
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
-
+  
+  def set_product
+    @product = Product.find(params[:id])
+  end
   def product_params
     params.require(:product).permit(:name, :description, :stock)
   end

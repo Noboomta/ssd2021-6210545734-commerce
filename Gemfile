@@ -5,10 +5,12 @@ ruby '2.7.2'
 
 # For pagination
 gem 'kaminari'
-# For page caching
-gem 'actionpack-page_caching'
-# For action caching
-gem 'actionpack-action_caching'
+# # For page caching
+# gem 'actionpack-page_caching'
+# # For action caching
+# gem 'actionpack-action_caching'
+
+# gem 'rack-cache'
 
 # For authentication
 gem 'devise'

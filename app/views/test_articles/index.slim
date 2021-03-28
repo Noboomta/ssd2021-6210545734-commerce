@@ -1,3 +1,5 @@
+h1 TestArticles
+
 .row
   .col-6
     h1 This is Products list
@@ -22,7 +24,6 @@
           th Name
           th Description
           th Stock
-          th Category
           th Created at
           th Updated at
           th Action
@@ -33,7 +34,6 @@
             td.font-weight-bold = a.name
             td = a.description
             td = a.stock
-            td.font-weight-light = "#{link_to Category.find(a.category_id).name, category_path(a.category_id)}"
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
             td
@@ -48,8 +48,8 @@
                   i.fas.fa-trash
 
 .row
-  .col-6
-    = paginate @products
+  / .col-6
+  /   = paginate @products
   .col-6
     .float-right
       = link_to new_product_path do
